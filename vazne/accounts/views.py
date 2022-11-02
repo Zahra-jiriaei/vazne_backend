@@ -3,35 +3,74 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-from knox.models import AuthToken
+
+from rest_framework import status
+from rest_framework.views import APIView
+from django.contrib.auth import authenticate,login
+from django.urls import reverse
+from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, RegisterSerializer
+import json
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+class RegisterAPI(APIView):
+    
+    def get(self,request):
+        return Response({'Message':'This is get method of signup API'},status=status.HTTP_200_OK)
 
-# Register API
-class RegisterAPI(generics.GenericAPIView):
-    serializer_class = RegisterSerializer
+    def post(self,request):
+        try:
+            obj =  SignUpSerializer(data =  request.data)
+            if obj.is_valid():
+                obj.save()
+                return Response({'Message':'Successfully Signed up'},status = status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({
-        "user": UserSerializer(user, context=self.get_serializer_context()).data,
-        "token": AuthToken.objects.create(user)[1]
-        })
-        
+            return Response(obj.errors,status = status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            return Response({'Message':'Something Failed due to {}'.format(str(e))}, status = status.HTTP_400_BAD_REQUEST)
+ 
         
 from django.contrib.auth import login
 
 from rest_framework import permissions
-from rest_framework.authtoken.serializers import AuthTokenSerializer
-from knox.views import LoginView as KnoxLoginView
 
-class LoginAPI(KnoxLoginView):
-    permission_classes = (permissions.AllowAny,)
+  
+class LoginAPI(APIView):
+    
+    def get(self,request):
+        return Response({'Message':'This is get method of Login API'},status =  status.HTTP_200_OK)
 
-    def post(self, request, format=None):
-        serializer = AuthTokenSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request, user)
-        return super(LoginAPI, self).post(request, format=None)
+    def post(self, request):
+        try:
+            input_data =  request.data
+            username =  input_data.get('username')
+            password =  input_data.get('password')
+
+            user = authenticate(username = username,password = password)
+            if user is not None:
+                login(request,user)
+
+                url =  'http://localhost:8000'+reverse('token_obtain_pair')
+                data = {'username':username,'password':password}
+                tokens =  requests.post(url,data=data)
+
+                return Response({'Tokens':json.loads(tokens.content)},status = status.HTTP_200_OK)
+            else:   
+                return Response({'Message':'Invalid username and password combination'}, status =  status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            return Response({'Message':'Something went wrong due to {}'.format(str(e))}, status = status.HTTP_400_BAD_REQUEST)
+        
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
