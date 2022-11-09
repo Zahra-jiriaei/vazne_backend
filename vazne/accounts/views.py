@@ -20,7 +20,7 @@ class RegisterAPI(APIView):
 
     def post(self,request):
         try:
-            obj =  SignUpSerializer(data =  request.data)
+            obj =  RegisterSerializer(data =  request.data)
             if obj.is_valid():
                 obj.save()
                 return Response({'Message':'Successfully Signed up'},status = status.HTTP_200_OK)
