@@ -1,3 +1,4 @@
+
 """
 Django settings for vazne project.
 
@@ -147,4 +148,5 @@ REST_FRAMEWORK = {
 }
 AUTH_USER_MODEL = 'users.CustomUser'
 MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
+
 MEDIA_URL = '/media/'

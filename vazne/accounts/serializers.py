@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import CustomUser
@@ -37,30 +37,4 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
-||||||| e7acc46
-=======
-from rest_framework import serializers
-from django.contrib.auth.models import User
 
-# User Serializer
-class UserSerializer(serializers.ModelSerializer):
-    
-    email = serializers.EmailField()
-    username = serializers.CharField(max_length = 20)
-    password =  serializers.CharField(max_length = 20)
-    class Meta:
-        model = User
-        fields = ('id', 'username','password', 'email')
-
-# Register Serializer
-class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-
-        return user
->>>>>>> 7eca0e4f77ba025c249101af334dd7306f9f3615
