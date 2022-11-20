@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'knox',
     'shop',
     'comments',
-    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +144,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ],
 }
-AUTH_USER_MODEL = 'users.CustomUser'
+# AUTH_USER_MODEL = 'users.CustomUser'
 MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 MEDIA_URL = '/media/'
