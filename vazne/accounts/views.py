@@ -21,7 +21,7 @@ class RegisterAPI(APIView):
 
     def post(self,request):
         try:
-            obj =  RegisterSerializer(data =  request.data)
+            obj =  SignUpSerializer(data =  request.data)
             if obj.is_valid():
                 obj.save()
                 return Response({'Message':'Successfully Signed up'},status = status.HTTP_200_OK)
@@ -75,3 +75,4 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
