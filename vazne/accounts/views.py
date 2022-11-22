@@ -25,7 +25,6 @@ class RegisterAPI(APIView):
             if obj.is_valid():
                 obj.save()
                 return Response({'Message':'Successfully Signed up'},status = status.HTTP_200_OK)
-
             return Response(obj.errors,status = status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:

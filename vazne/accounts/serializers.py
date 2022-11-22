@@ -14,12 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
-    username = serializers.CharField(max_length = 20,required=True)
-    password = serializers.CharField(write_only=True,required=True)
+    # validators=[UniqueValidator(queryset=User.objects.all())])
+    username = serializers.CharField(max_length = 20)
+    password = serializers.CharField(write_only=True,
+                                     required=True)
     password2 = serializers.CharField(write_only=True, required=True)
     class Meta:
         model = CustomUser
-        fields = ('email','username','password','password2','role')
+        fields = ('email','username','password','password2', 'role')
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
