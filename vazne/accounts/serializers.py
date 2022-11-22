@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import CustomUser
@@ -36,4 +35,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
-

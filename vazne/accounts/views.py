@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 # Create your views here.
-
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 
@@ -21,7 +20,7 @@ class RegisterAPI(APIView):
 
     def post(self,request):
         try:
-            obj =  SignUpSerializer(data =  request.data)
+            obj =  RegisterSerializer(data =  request.data)
             if obj.is_valid():
                 obj.save()
                 return Response({'Message':'Successfully Signed up'},status = status.HTTP_200_OK)
@@ -74,4 +73,3 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
