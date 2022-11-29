@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'accounts',
+    
 ]
 
 MIDDLEWARE = [
@@ -84,8 +85,8 @@ WSGI_APPLICATION = 'vazne.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vazne',
-        'USER': 'admin',
+        'NAME': 'Vazne',
+        'USER': 'user',
         'PASSWORD': '123456789',
         'HOST': '127.0.0.1',
         'PORT': '3307',

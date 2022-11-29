@@ -57,3 +57,5 @@ def update(request,shop_id):
         form = ShopUpdateForm(instance=product)
     return render(request , 'update.html' , {'form' : form})
     
+#----------------ZJ----------------
+

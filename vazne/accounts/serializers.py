@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import CustomUser
-
+from .models import credit
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
     role = serializers.CharField(source='get_role_display')
@@ -35,3 +35,19 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+    
+#------------Credit-------------
+class creditSerializer(serializers.ModelSerializer):
+    model = credit
+    # credit_amount = serializers.CharField(write_only=True,
+    #                                  required=True)
+    
+    class Meta:
+        model = credit
+        fields = ('amount', )
+    
+    def create(self,request):
+        print(request['amount'])
+        amount=self.model(amount = request['amount'])
+        amount.save()
+        return amount

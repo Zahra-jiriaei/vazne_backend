@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate,login
 from django.urls import reverse
 from rest_framework.permissions import IsAuthenticated
-from .serializers import UserSerializer, RegisterSerializer
+from .serializers import UserSerializer, RegisterSerializer, creditSerializer
 import json
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -73,3 +73,22 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+# ------------Cart----------------
+class credit(APIView):
+    
+    def get(self,request):
+        
+        return Response({'Message':'This is get method of credit API'},status=status.HTTP_200_OK)
+
+    def post(self,request):
+        try:
+            obj =  creditSerializer(data = request.data)
+            if obj.is_valid():
+                obj.save()
+                return Response({'Message':'Successfully done!'},status = status.HTTP_200_OK)
+            return Response(obj.errors,status = status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            return Response({'Message':'Something went wrong due to {}'.format(str(e))}, status = status.HTTP_400_BAD_REQUEST)
+ 

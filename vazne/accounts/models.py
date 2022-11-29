@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 
+
 from .managers import CustomUserManager
 
 class CustomUser(User):
@@ -9,3 +10,5 @@ class CustomUser(User):
     role = models.CharField(max_length=1, choices=role_choice)
     objects = CustomUserManager()
 
+class credit(models.Model):
+    amount=models.IntegerField(default=0,blank=False,null=False)
