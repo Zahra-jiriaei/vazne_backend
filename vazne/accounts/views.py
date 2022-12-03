@@ -1,8 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import generics, permissions
 from rest_framework.response import Response
+from .models import credit
 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -78,8 +80,14 @@ class LogoutView(APIView):
 class credit(APIView):
     
     def get(self,request):
+        try:
+            Credit = creditSerializer('amount')
+            return JsonResponse(Credit.data)
         
-        return Response({'Message':'This is get method of credit API'},status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={'Error': str(e)})
+        
 
     def post(self,request):
         try:

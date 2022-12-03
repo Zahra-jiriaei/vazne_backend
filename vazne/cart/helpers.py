@@ -1,6 +1,6 @@
 
 from .models import Cart, DeliveryCost
-from discounts.helpers import CampaignHelper, CouponHelper
+# from discounts.helpers import CampaignHelper, CouponHelper
 
 
 class DeliveryCostHelper:
@@ -37,15 +37,15 @@ class CartHelper:
 
     def __init__(self, user):
         self.user = user
-        self.cart_base_total_amount = 0
-        self.cart_final_total_amount = 0
-        self.campaign_discount_amounts = []
-        self.campaign_discount_amount = 0
-        self.coupon_discount_amount = 0
-        self.delivery_cost = 0
+        #self.cart_base_total_amount = 0
+        #self.cart_final_total_amount = 0
+        #self.campaign_discount_amounts = []
+        #self.campaign_discount_amount = 0
+        #self.coupon_discount_amount = 0
+        #self.delivery_cost = 0
         self.cart_items = []
-        self.discounts = {}
-        self.checkout_details = {'products': [], 'total': [], 'amount': []}
+        #self.discounts = {}
+        self.checkout_details = {'products': [], 'amount': [], 'total': []}
 
     def prepare_cart_for_checkout(self):
         self.cart_items = Cart.objects.filter(user=self.user)
