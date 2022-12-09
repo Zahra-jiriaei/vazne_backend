@@ -18,14 +18,17 @@ class User(models.Model):
 """
 
 class Cart(models.Model):
+    
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     item = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(null=False)
+    # left= Product.num_existence_now-quantity
 
     def __str__(self):
-        return "{} - {} - {} - {} - {}".format(self.user,
+        return "{} - {} - {} - {}".format(self.user,
                                                self.item,
                                                self.quantity,
+                                               #self.left
                                               )
 
 

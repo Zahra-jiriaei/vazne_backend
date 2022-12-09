@@ -7,7 +7,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.db import models
-
+from accounts.models import CustomUser
+#from cart.models import Cart
 def product_directory_path(instance, filename):
     return 'images/{0}/'.format(filename)
 
@@ -20,15 +21,18 @@ class Product(models.Model):
     data_added = models.DateTimeField()
     num_stars = models.IntegerField()
     existence = models.BooleanField()
+    num_existence_now = models.IntegerField()  
+    #num_existence_total = num_existence_here - Cart.quantity
     Unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     manufacturer = models.CharField(max_length=250)
     discount = models.DecimalField(max_digits=5, decimal_places=2)
     review = models.TextField()
     color = models.CharField(max_length=250)
-    add_by = models.ForeignKey(User , on_delete=models.CASCADE)
+    add_by = models.ForeignKey(CustomUser , on_delete=models.CASCADE)
     images = models.ImageField(upload_to='Images/', default = 'Images/None/No-img.jpg')
     
     def __str__(self):
+        
         return self.product_name
     
 

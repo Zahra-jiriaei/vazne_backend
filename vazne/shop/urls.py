@@ -17,8 +17,8 @@ urlpatterns = [
     path('', views.shop),
     path('detail/<int:shop_id>/' , views.detail , name='details'),
     path('delete/<int:shop_id>/' , views.delete, name='delete'),
-    path('update/<int:shop_id>/' , views.update, name='update'),
-    path('create/' , views.create , name='create'),
+    #path('update/<int:shop_id>/' , views.update, name='update'),
+    #path('create/' , views.create , name='create'),
 ]
 
 

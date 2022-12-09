@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import ShopForm , ShopUpdateForm
+#from .forms import ShopForm , ShopUpdateForm
 
 from rest_framework import viewsets , permissions
 from django.contrib.auth.models import User
@@ -29,9 +29,9 @@ def detail(request , shop_id):
 def delete(request, shop_id):
     Product.objects.get(id = shop_id).delete()
     messages.success(request , 'this item deleted successfully' )
-    return redirect('http://127.0.0.1:8000/shop/')
+    return redirect('http://127.0.0.1:8000/cart/')
 
-def create(request):
+"""def create(request):
     if request.method == 'POST':
         form = ShopForm(request.POST)
         if form.is_valid():
@@ -41,10 +41,10 @@ def create(request):
             return redirect('http://127.0.0.1:8000/shop/')
     else:
         form = ShopForm()
-    return render(request , 'create.html' , {'form' : form})
+    return render(request , 'create.html' , {'form' : form})"""
 
 
-
+"""
 def update(request,shop_id):
     product = Product.objects.get(id = shop_id)
     if request.method == 'POST':
@@ -56,6 +56,6 @@ def update(request,shop_id):
     else:
         form = ShopUpdateForm(instance=product)
     return render(request , 'update.html' , {'form' : form})
-    
-#----------------ZJ----------------
+    """
+
 
