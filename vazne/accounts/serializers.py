@@ -18,7 +18,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     validators=[UniqueValidator(queryset=User.objects.all())])
     username = serializers.CharField(max_length = 20)
     password = serializers.CharField(write_only=True,
-                                     required=True, validators=[validate_password])
+                                     required=True)
     password2 = serializers.CharField(write_only=True, required=True)
     class Meta:
         model = CustomUser
