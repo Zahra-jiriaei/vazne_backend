@@ -10,12 +10,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("accounts.urls")),
     #path('',include("discounts.urls")),
-    path('cart/',include("cart.urls")),
+    
     path('shop/', include('shop.urls')),
     path('coach/', include('coach.urls')),
+    path('CartPage/', include('CartPage.urls')),
     path('api/' , include('shop.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/comments/', include(('comments.api.urls' , 'comments') , namespace = 'comments-api')),
+     
 ] + static(settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)
     
 

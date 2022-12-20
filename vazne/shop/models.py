@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -15,6 +16,7 @@ def product_directory_path(instance, filename):
 class Product(models.Model):
     product_name = models.CharField(max_length=250)
     product_code = models.CharField(max_length=250)
+    #product_code = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, unique=True)
     category = models.CharField(max_length=250)
     describtion = models.TextField()
     slug = models.SlugField(max_length=250)

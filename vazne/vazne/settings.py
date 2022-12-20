@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     #'discounts',
-    'cart',
-    'coach'
+    
+    'coach',
+    'CartPage'
     
 ]
 
