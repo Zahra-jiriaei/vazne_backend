@@ -8,7 +8,7 @@ The project was developed by a four-member team following the **Scrum** framewor
 
 ## Roles
 
-Amirhossein Safaei Mehr and Zahra Jiriaei  worked as Backend Developers, using Python and Django to implement server-side functionalities, business logic, and database integration.
+Zahra Jiriaei and Amirhossein Safaei Mehr worked as Backend Developers, using Python and Django to implement server-side functionalities, business logic, and database integration.
 
 ## Features
 
